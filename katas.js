@@ -510,61 +510,61 @@ function guessGifts(wishlist, presents) {
 
 // ======== Decode the Morse code
 // https://www.codewars.com/kata/54b724efac3d5402db00065e
-decodeMorse = function(morseCode){
+decodeMorse = function (morseCode) {
     const letters = morseCode.trim().split(' ');
-    
-  let message="";
-    for (i=0; i<letters.length;i++) {
-      if (letters[i] !== '') {
-        message += MORSE_CODE[letters[i]];
-      } else {
-        message += " ";
-        i++
-      }
+
+    let message = "";
+    for (i = 0; i < letters.length; i++) {
+        if (letters[i] !== '') {
+            message += MORSE_CODE[letters[i]];
+        } else {
+            message += " ";
+            i++
+        }
     }
     return message;
-  }
+}
 
 // ======== Next bigger number with the same digits
 // https://www.codewars.com/kata/55983863da40caa2c900004e
-function nextBigger(n){
+function nextBigger(n) {
     let s = n.toString().split('');
     let pivotIndex = -1;
-    for (i= s.length - 1; i > 0; i--) {
-      if (s[i-1] < s[i]){
-        pivotIndex = i - 1;
-        break;
-      }
-    }
-    
-    if (pivotIndex == -1) return pivotIndex;
-    
-    let right = s.splice(pivotIndex);
-    
-    let pivotValue = right.splice(0, 1);
-    
-    let min = null, minIndex = null;
-    for (i = 0; i < right.length; i++){
-      if (right[i] > pivotValue) {
-        if (min == null || right[i] < min){
-          min = right[i];
-          minIndex = i
+    for (i = s.length - 1; i > 0; i--) {
+        if (s[i - 1] < s[i]) {
+            pivotIndex = i - 1;
+            break;
         }
-      }
     }
-    
-    if (minIndex ==null) return -1;
-    
-    right.splice(minIndex,1);
+
+    if (pivotIndex == -1) return pivotIndex;
+
+    let right = s.splice(pivotIndex);
+
+    let pivotValue = right.splice(0, 1);
+
+    let min = null, minIndex = null;
+    for (i = 0; i < right.length; i++) {
+        if (right[i] > pivotValue) {
+            if (min == null || right[i] < min) {
+                min = right[i];
+                minIndex = i
+            }
+        }
+    }
+
+    if (minIndex == null) return -1;
+
+    right.splice(minIndex, 1);
     right.push(pivotValue[0]);
     right = right.sort()
-    
+
     let ret = s.concat([min]).concat(right).join('');
-    if(ret < n) return -1
-    
+    if (ret < n) return -1
+
     return ret * 1
-  
-  }
+
+}
 
 
 // ======== 
