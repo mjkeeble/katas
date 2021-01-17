@@ -645,11 +645,43 @@ const turnChordsIntoTab = (chords) => {
       return stave;
   }
 
+// ======== Snail
+// https://www.codewars.com/kata/521c2db8ddc89b9b7a0000c1
 
-// ======== 
+snail = function(array) {
+    if (array.length ===1) return array[0]
+    let returnArr = [array[0][0]]
+    
+    const size = array[0].length
+    let routes = size * 2 - 1
+    console.log({size})
+    console.log({routes})
+    let x = 0;
+    let y = 0;
+    let direction = 0;
+    const movements = [[1,0], [0,1], [-1,0], [0,-1]]
+    for (i = 1; i <= routes; i++){
+      console.log(`steps ${Math.min(size - Math.floor(i/2), size - 1)}`)
+      for (j = 1; j<= Math.min(size - Math.floor(i/2), size -1); j++){
+        x = x + movements[direction][0]
+        y = y + movements[direction][1]
+        
+        // console.log(`x: ${x}, y:${y}`)
+        returnArr.push(array[y][x])
+        
+      } //end j loop
+    direction = (direction + 1) % 4 
+    } //end i loop routes
+    return returnArr
+  }
 
+// ======== Snail crawls up
+// https://www.codewars.com/kata/5b93fecd8463745630001d05/train/javascript
 
-// ======== 
+function snail(column, day, night) {
+    if(day >= column) return 1;
+    return Math.ceil((column - day)/(day - night)) + 1;
+  }
 
 
 // ======== 
