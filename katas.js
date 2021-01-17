@@ -567,10 +567,83 @@ function nextBigger(n) {
 }
 
 
-// ======== 
+// ======== Scramblies
+// https://www.codewars.com/kata/55c04b4cc56a697bb0000048
+// NOT AN IDEAL SOLUTION, but it doesn't timeout!!
 
+function scramble(str1, str2) {
+    let str1Letters = {}
+    let str2Letters = {}
+    
+    for (i=0; i<str1.length; i++) {
+      if(str1Letters[`${str1.charAt(i)}`]){
+       str1Letters[`${str1.charAt(i)}`] ++
+      } else {
+        str1Letters[`${str1.charAt(i)}`] = 1
+      }
+    }
+    for (i=0; i<str2.length; i++) {
+      if(str2Letters[`${str2.charAt(i)}`]){
+       str2Letters[`${str2.charAt(i)}`] ++
+      } else {
+        str2Letters[`${str2.charAt(i)}`] = 1
+      }
+    }
+    console.log(str1Letters)
+    console.log(str2Letters)
+    
+    for (letter in str2Letters) {
+      console.log(`${letter} ${str1Letters[letter]} ${str2Letters[letter]}`)
+      if (!str1Letters[letter] || str1Letters[letter] < str2Letters[letter]) return false
+    }
+    return true
+  }
 
-// ======== 
+// ======== Guitar Tab Transcriber
+// https://www.codewars.com/kata/5ae24f79c5a452e1780000ad
+
+const turnChordsIntoTab = (chords) => {
+    const chordsArr = chords.split(" ");
+    const tab= "";
+    let stave = '';
+  
+      const strings = ["e", "B", "G", "D", "A", "E"];
+      const chordReference = [
+          ["Am", "0", "1", "2", "2", "0", "-"],
+          ["C", "0", "1", "0", "2", "3", "-"],
+          ["D", "2", "3", "2", "0", "-", "-"],
+          ["G", "3", "0", "0", "0", "2", "3"],
+      ];
+  
+      for (i=0; i < strings.length; i++){
+        strings[i] += "|";
+      }
+    // add chords to tab
+    for (let chord in chordsArr){
+      console.log(chordsArr[chord])
+      for (i = 0; i <strings.length; i++){
+        for (j = 0 ; j < chordReference.length; j++)
+             if(chordReference[j][0] == chordsArr[chord]) {
+          strings[i] += "---" +chordReference[j][i+1];
+        }
+      }
+    }
+    // compile tab
+    for (i=0; i < strings.length; i++){
+    strings[i] += `---|\n`;
+      stave += strings[i]
+      }
+    // add chord names
+    let chordNames = "     "
+    for (let chord in chordsArr){
+      chordNames += chordsArr[chord].padEnd(4," ")
+    }
+      chordNames = chordNames.trimEnd()
+    strings.push(chordNames)
+    stave += chordNames
+    
+      return stave;
+  }
 
 
 // ======== 
