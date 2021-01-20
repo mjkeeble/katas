@@ -574,114 +574,179 @@ function nextBigger(n) {
 function scramble(str1, str2) {
     let str1Letters = {}
     let str2Letters = {}
-    
-    for (i=0; i<str1.length; i++) {
-      if(str1Letters[`${str1.charAt(i)}`]){
-       str1Letters[`${str1.charAt(i)}`] ++
-      } else {
-        str1Letters[`${str1.charAt(i)}`] = 1
-      }
+
+    for (i = 0; i < str1.length; i++) {
+        if (str1Letters[`${str1.charAt(i)}`]) {
+            str1Letters[`${str1.charAt(i)}`]++
+        } else {
+            str1Letters[`${str1.charAt(i)}`] = 1
+        }
     }
-    for (i=0; i<str2.length; i++) {
-      if(str2Letters[`${str2.charAt(i)}`]){
-       str2Letters[`${str2.charAt(i)}`] ++
-      } else {
-        str2Letters[`${str2.charAt(i)}`] = 1
-      }
+    for (i = 0; i < str2.length; i++) {
+        if (str2Letters[`${str2.charAt(i)}`]) {
+            str2Letters[`${str2.charAt(i)}`]++
+        } else {
+            str2Letters[`${str2.charAt(i)}`] = 1
+        }
     }
     console.log(str1Letters)
     console.log(str2Letters)
-    
+
     for (letter in str2Letters) {
-      console.log(`${letter} ${str1Letters[letter]} ${str2Letters[letter]}`)
-      if (!str1Letters[letter] || str1Letters[letter] < str2Letters[letter]) return false
+        console.log(`${letter} ${str1Letters[letter]} ${str2Letters[letter]}`)
+        if (!str1Letters[letter] || str1Letters[letter] < str2Letters[letter]) return false
     }
     return true
-  }
+}
 
 // ======== Guitar Tab Transcriber
 // https://www.codewars.com/kata/5ae24f79c5a452e1780000ad
 
 const turnChordsIntoTab = (chords) => {
     const chordsArr = chords.split(" ");
-    const tab= "";
+    const tab = "";
     let stave = '';
-  
-      const strings = ["e", "B", "G", "D", "A", "E"];
-      const chordReference = [
-          ["Am", "0", "1", "2", "2", "0", "-"],
-          ["C", "0", "1", "0", "2", "3", "-"],
-          ["D", "2", "3", "2", "0", "-", "-"],
-          ["G", "3", "0", "0", "0", "2", "3"],
-      ];
-  
-      for (i=0; i < strings.length; i++){
+
+    const strings = ["e", "B", "G", "D", "A", "E"];
+    const chordReference = [
+        ["Am", "0", "1", "2", "2", "0", "-"],
+        ["C", "0", "1", "0", "2", "3", "-"],
+        ["D", "2", "3", "2", "0", "-", "-"],
+        ["G", "3", "0", "0", "0", "2", "3"],
+    ];
+
+    for (i = 0; i < strings.length; i++) {
         strings[i] += "|";
-      }
+    }
     // add chords to tab
-    for (let chord in chordsArr){
-      console.log(chordsArr[chord])
-      for (i = 0; i <strings.length; i++){
-        for (j = 0 ; j < chordReference.length; j++)
-             if(chordReference[j][0] == chordsArr[chord]) {
-          strings[i] += "---" +chordReference[j][i+1];
+    for (let chord in chordsArr) {
+        console.log(chordsArr[chord])
+        for (i = 0; i < strings.length; i++) {
+            for (j = 0; j < chordReference.length; j++)
+                if (chordReference[j][0] == chordsArr[chord]) {
+                    strings[i] += "---" + chordReference[j][i + 1];
+                }
         }
-      }
     }
     // compile tab
-    for (i=0; i < strings.length; i++){
-    strings[i] += `---|\n`;
-      stave += strings[i]
-      }
+    for (i = 0; i < strings.length; i++) {
+        strings[i] += `---|\n`;
+        stave += strings[i]
+    }
     // add chord names
     let chordNames = "     "
-    for (let chord in chordsArr){
-      chordNames += chordsArr[chord].padEnd(4," ")
+    for (let chord in chordsArr) {
+        chordNames += chordsArr[chord].padEnd(4, " ")
     }
-      chordNames = chordNames.trimEnd()
+    chordNames = chordNames.trimEnd()
     strings.push(chordNames)
     stave += chordNames
-    
-      return stave;
-  }
+
+    return stave;
+}
 
 // ======== Snail
 // https://www.codewars.com/kata/521c2db8ddc89b9b7a0000c1
 
-snail = function(array) {
-    if (array.length ===1) return array[0]
+snail = function (array) {
+    if (array.length === 1) return array[0]
     let returnArr = [array[0][0]]
-    
+
     const size = array[0].length
     let routes = size * 2 - 1
-    console.log({size})
-    console.log({routes})
+    console.log({ size })
+    console.log({ routes })
     let x = 0;
     let y = 0;
     let direction = 0;
-    const movements = [[1,0], [0,1], [-1,0], [0,-1]]
-    for (i = 1; i <= routes; i++){
-      console.log(`steps ${Math.min(size - Math.floor(i/2), size - 1)}`)
-      for (j = 1; j<= Math.min(size - Math.floor(i/2), size -1); j++){
-        x = x + movements[direction][0]
-        y = y + movements[direction][1]
-        
-        // console.log(`x: ${x}, y:${y}`)
-        returnArr.push(array[y][x])
-        
-      } //end j loop
-    direction = (direction + 1) % 4 
+    const movements = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+    for (i = 1; i <= routes; i++) {
+        console.log(`steps ${Math.min(size - Math.floor(i / 2), size - 1)}`)
+        for (j = 1; j <= Math.min(size - Math.floor(i / 2), size - 1); j++) {
+            x = x + movements[direction][0]
+            y = y + movements[direction][1]
+
+            // console.log(`x: ${x}, y:${y}`)
+            returnArr.push(array[y][x])
+
+        } //end j loop
+        direction = (direction + 1) % 4
     } //end i loop routes
     return returnArr
-  }
+}
 
 // ======== Snail crawls up
 // https://www.codewars.com/kata/5b93fecd8463745630001d05/train/javascript
 
 function snail(column, day, night) {
-    if(day >= column) return 1;
-    return Math.ceil((column - day)/(day - night)) + 1;
+    if (day >= column) return 1;
+    return Math.ceil((column - day) / (day - night)) + 1;
+}
+
+// ======== Stop gninnipS My sdroW!
+// https://www.codewars.com/kata/5264d2b162488dc400000001
+function spinWords(sentence){
+    const words = sentence.split(" ");
+    const output = []
+    for (let word of words) {
+      if (word.length > 4){
+        word = word.split("").reverse().join("")
+      }
+      output.push(word)
+        console.log(output)
+    }
+    return output.join(" ")
   }
+
+// ======== If you can read this...
+// https://www.codewars.com/kata/586538146b56991861000293
+
+function to_nato(words) {
+    const alphabet = {
+    "A": "Alfa",
+    "B": "Bravo",
+    "C": "Charlie",
+    "D": "Delta",
+    "E": "Echo",
+    "F": "Foxtrot",
+    "G": "Golf",
+    "H": "Hotel",
+    "I": "India",
+    "J": "Juliett",
+    "K": "Kilo",
+    "L": "Lima",
+    "M": "Mike",
+    "N": "November",
+    "O": "Oscar",
+    "P": "Papa",
+    "Q": "Quebec",
+    "R": "Romeo",
+    "S": "Sierra",
+    "T": "Tango",
+    "U": "Uniform",
+    "V": "Victor",
+    "W": "Whiskey",
+    "X": "Xray",
+    "Y": "Yankee",
+    "Z": "Zulu"
+  }
+    const output = []
+    letters = words.replace(/\s+/g, '');
+    for (i=0; i<letters.length; i++) {
+      const letter = letters[i].toUpperCase();
+      if(letter === "." || letter === "!" || letter === "?"){
+        output.push(letter);
+      } else {
+        output.push(alphabet[letter]);
+      }
+      
+    }
+    return output.join(" ");
+  }
+// ======== 
+
+
+// ======== 
 
 
 // ======== 
