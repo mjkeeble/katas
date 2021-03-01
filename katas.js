@@ -232,7 +232,7 @@ function capital(capitals) {
             delete Object.assign(capitals[i], { state: capitals[i].country }).country
         }
 
-        //   for (let i = 0: i< capitals.length; i++) 
+        //   for (let i = 0: i< capitals.length; i++)
         output.push(`The capital of ${capitals[i].state} is ${capitals[i].capital}`)
     }
     return output
@@ -739,17 +739,63 @@ function to_nato(words) {
       } else {
         output.push(alphabet[letter]);
       }
-      
+
     }
     return output.join(" ");
   }
-// ======== 
+// ======== Pyramid Array
+// https://www.codewars.com/kata/515f51d438015969f7000013
+
+function pyramid(n) {
+  const res = [];
+  for(let i = 0; i < n; i++){
+    res.push([...Array(i+1)].fill(1))
+  }
+  return res;
+}
 
 
-// ======== 
+// ======== Max-min arrays
+// https://www.codewars.com/kata/5a090c4e697598d0b9000004
+
+function solve(arr) {
+  const sortedArr = arr.sort(function (a, b) {
+    return a - b;
+  }); // end array sort
+  const resultArr = [];
+
+  while (sortedArr.length > 0) {
+    resultArr.push(sortedArr.pop());
+    if (sortedArr.length > 0) {
+      resultArr.push(sortedArr.shift());
+    } else {
+      return resultArr;
+    };
+  }
+
+  return resultArr;
+};
+
+// ======== Sum two arrays
+// https://www.codewars.com/kata/59c3e8c9f5d5e40cab000ca6
+
+function addArrays(array1, array2) {
+  if (!array1.length) {return array2};
+  if (!array2.length) {return array1};
+
+  let array1ToNumber = parseInt(array1.join(''));
+  let array2ToNumber = parseInt(array2.join(''));
+
+  let sum = array1ToNumber + array2ToNumber;
+  const outputStrings = sum.toString().split("")
+  if (outputStrings[0] == '-') {
+    outputStrings.shift();
+    outputStrings[0] = '-'.concat(outputStrings[0])
+  }
+
+  const output = outputStrings.map (x => parseInt(x));
+  return output
+}
 
 
-// ======== 
-
-
-// ======== 
+// ========
